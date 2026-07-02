@@ -35,9 +35,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 # ══════════════════════════════════════════════════════
 # CONFIGURAÇÕES DE E-MAIL
 # ══════════════════════════════════════════════════════
-EMAIL_REMETENTE    = os.environ.get("EMAIL_REMETENTE",    "seuemail@gmail.com")
-SENHA_APP          = os.environ.get("SENHA_APP",          "xxxx xxxx xxxx xxxx")
-EMAIL_DESTINATARIO = os.environ.get("EMAIL_DESTINATARIO", "seuemail@gmail.com")
+BREVO_LOGIN        = os.environ.get("BREVO_LOGIN",        "seuemail@gmail.com")
+BREVO_SENHA        = os.environ.get("BREVO_SENHA",        "senha")
 
 # ══════════════════════════════════════════════════════
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
@@ -59,7 +58,7 @@ HEADERS = {
     "Origin": "https://www.ead.senac.br",
 }
 
-DEBUG = False  # Mude para False após confirmar que está funcionando
+DEBUG = True  # Mude para False após confirmar que está funcionando
 
 
 # ══════════════════════════════════════════════════════
