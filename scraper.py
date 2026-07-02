@@ -38,6 +38,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 BREVO_LOGIN        = os.environ.get("BREVO_LOGIN",        "seuemail@gmail.com")
 BREVO_SENHA        = os.environ.get("BREVO_SENHA",        "senha")
 EMAIL_DESTINATARIO = os.environ.get("EMAIL_DESTINATARIO", "seuemail@gmail.com")
+
 # ══════════════════════════════════════════════════════
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
 ARQUIVO_CURSOS = os.path.join(BASE_DIR, "data", "courses.json")
@@ -58,7 +59,7 @@ HEADERS = {
     "Origin": "https://www.ead.senac.br",
 }
 
-DEBUG = False  # Mude para False após confirmar que está funcionando
+DEBUG = True  # Mude para False após confirmar que está funcionando
 
 
 # ══════════════════════════════════════════════════════
@@ -185,7 +186,6 @@ def salvar_estado(estado: dict):
 # ══════════════════════════════════════════════════════
 
 def enviar_email(cursos_novos: list[dict]):
-    
     assunto = f"🎓 {len(cursos_novos)} novo(s) curso(s) com inscrições abertas!"
     linhas  = "\n".join(f"  • {c['nome']}" for c in cursos_novos)
     corpo   = (
@@ -201,7 +201,7 @@ def enviar_email(cursos_novos: list[dict]):
 
     with smtplib.SMTP("smtp.gmail.com", 587) as s:
         s.starttls()
-        s.login(BREVO_LOGIN, SENHA_APP)
+        s.login(BREVO_LOGIN, BREVO_SENHA)
         s.send_message(msg)
 
     print(f"[E-mail] Enviado com {len(cursos_novos)} curso(s).")
