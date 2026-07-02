@@ -33,8 +33,7 @@ jobs:
       - name: Rodar scraper
         run: python scraper.py
         env:
-          EMAIL_REMETENTE: ${{ secrets.EMAIL_REMETENTE }}
-          SENHA_APP: ${{ secrets.SENHA_APP }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           EMAIL_DESTINATARIO: ${{ secrets.EMAIL_DESTINATARIO }}
           DEBUG: "false"
 
