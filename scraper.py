@@ -185,10 +185,7 @@ def salvar_estado(estado: dict):
 # ══════════════════════════════════════════════════════
 
 def enviar_email(cursos_novos: list[dict]):
-    if EMAIL_REMETENTE == "seuemail@gmail.com":
-        print("[E-mail] Credenciais não configuradas. Pulando envio.")
-        return
-
+    
     assunto = f"🎓 {len(cursos_novos)} novo(s) curso(s) com inscrições abertas!"
     linhas  = "\n".join(f"  • {c['nome']}" for c in cursos_novos)
     corpo   = (
