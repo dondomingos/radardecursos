@@ -194,14 +194,14 @@ def enviar_email(cursos_novos: list[dict]):
         f"Acesse: {BASE_URL}\n"
     )
     msg = MIMEMultipart()
-    msg["From"]    = EMAIL_REMETENTE
+    msg["From"]    = BREVO_LOGIN
     msg["To"]      = EMAIL_DESTINATARIO
     msg["Subject"] = assunto
     msg.attach(MIMEText(corpo, "plain", "utf-8"))
 
     with smtplib.SMTP("smtp.gmail.com", 587) as s:
         s.starttls()
-        s.login(EMAIL_REMETENTE, SENHA_APP)
+        s.login(BREVO_LOGIN, SENHA_APP)
         s.send_message(msg)
 
     print(f"[E-mail] Enviado com {len(cursos_novos)} curso(s).")
