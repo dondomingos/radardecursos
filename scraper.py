@@ -16,10 +16,7 @@ Campos relevantes do JSON:
 
 import json
 import os
-import smtplib
 from datetime import datetime, timezone
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 import time
 
@@ -35,8 +32,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # ══════════════════════════════════════════════════════
 # CONFIGURAÇÕES DE E-MAIL
 # ══════════════════════════════════════════════════════
-BREVO_LOGIN        = os.environ.get("BREVO_LOGIN",        "seuemail@gmail.com")
-BREVO_SENHA        = os.environ.get("BREVO_SENHA",        "senha")
+BREVO_API_KEY      = os.environ.get("BREVO_API_KEY",      "")
 EMAIL_DESTINATARIO = os.environ.get("EMAIL_DESTINATARIO", "seuemail@gmail.com")
 
 # ══════════════════════════════════════════════════════
@@ -59,7 +55,7 @@ HEADERS = {
     "Origin": "https://www.ead.senac.br",
 }
 
-DEBUG = False  # Mude para False após confirmar que está funcionando
+DEBUG = True  # Mude para False após confirmar que está funcionando
 
 
 # ══════════════════════════════════════════════════════
@@ -187,24 +183,35 @@ def salvar_estado(estado: dict):
 
 def enviar_email(cursos_novos: list[dict]):
     assunto = f"🎓 {len(cursos_novos)} novo(s) curso(s) com inscrições abertas!"
-    linhas  = "\n".join(f"  • {c['nome']}" for c in cursos_novos)
-    corpo   = (
-        "Novos cursos técnicos Senac EAD com inscrições abertas:\n\n"
-        f"{linhas}\n\n"
-        f"Acesse: {BASE_URL}\n"
+    linhas  = "".join(f"<li>{c['nome']}</li>" for c in cursos_novos)
+    corpo_html = f"""
+    <h2>Novos cursos técnicos com inscrições abertas!</h2>
+    <ul>{linhas}</ul>
+    <p><a href="{BASE_URL}">Acessar Senac EAD Gratuito</a></p>
+    """
+
+    payload = {
+        "sender":      {"name": "Radar de Cursos", "email": "noreply@radardecursos.com.br"},
+        "to":          [{"email": EMAIL_DESTINATARIO}],
+        "subject":     assunto,
+        "htmlContent": corpo_html
+    }
+
+    resp = requests.post(
+        "https://api.brevo.com/v3/smtp/email",
+        headers={
+            "accept":       "application/json",
+            "content-type": "application/json",
+            "api-key":      BREVO_API_KEY
+        },
+        json=payload,
+        timeout=15
     )
-    msg = MIMEMultipart()
-    msg["From"]    = BREVO_LOGIN
-    msg["To"]      = EMAIL_DESTINATARIO
-    msg["Subject"] = assunto
-    msg.attach(MIMEText(corpo, "plain", "utf-8"))
 
-    with smtplib.SMTP("smtp-relay.brevo.com", 587) as s:
-        s.starttls()
-        s.login(BREVO_LOGIN, BREVO_SENHA)
-        s.send_message(msg)
-
-    print(f"[E-mail] Enviado com {len(cursos_novos)} curso(s).")
+    if resp.status_code == 201:
+        print(f"[E-mail] Enviado com {len(cursos_novos)} curso(s).")
+    else:
+        print(f"[E-mail] Erro: {resp.status_code} - {resp.text}")
 
 
 # ══════════════════════════════════════════════════════
