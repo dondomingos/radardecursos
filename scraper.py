@@ -37,7 +37,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # ══════════════════════════════════════════════════════
 BREVO_LOGIN        = os.environ.get("BREVO_LOGIN",        "seuemail@gmail.com")
 BREVO_SENHA        = os.environ.get("BREVO_SENHA",        "senha")
-
+EMAIL_DESTINATARIO = os.environ.get("EMAIL_DESTINATARIO", "seuemail@gmail.com")
 # ══════════════════════════════════════════════════════
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
 ARQUIVO_CURSOS = os.path.join(BASE_DIR, "data", "courses.json")
