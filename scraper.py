@@ -191,7 +191,7 @@ def enviar_email(cursos_novos: list[dict]):
     """
 
     payload = {
-        "sender":      {"name": "Radar de Cursos", "email": "noreply@radardecursos.com.br"},
+        "sender":      {"name": "Radar de Cursos", "email": EMAIL_DESTINATARIO},
         "to":          [{"email": EMAIL_DESTINATARIO}],
         "subject":     assunto,
         "htmlContent": corpo_html
