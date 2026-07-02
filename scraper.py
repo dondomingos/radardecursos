@@ -33,6 +33,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # CONFIGURAÇÕES DE E-MAIL
 # ══════════════════════════════════════════════════════
 BREVO_API_KEY      = os.environ.get("BREVO_API_KEY",      "")
+EMAIL_REMETENTE    = os.environ.get("EMAIL_REMETENTE",    "dondomingosbrasil@gmail.com")
 EMAIL_DESTINATARIO = os.environ.get("EMAIL_DESTINATARIO", "seuemail@gmail.com")
 
 # ══════════════════════════════════════════════════════
@@ -191,7 +192,7 @@ def enviar_email(cursos_novos: list[dict]):
     """
 
     payload = {
-        "sender":      {"name": "Radar de Cursos", "email": EMAIL_DESTINATARIO},
+        "sender":      {"name": "Radar de Cursos", "email": EMAIL_REMETENTE},
         "to":          [{"email": EMAIL_DESTINATARIO}],
         "subject":     assunto,
         "htmlContent": corpo_html
