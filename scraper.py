@@ -35,9 +35,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 # ══════════════════════════════════════════════════════
 # CONFIGURAÇÕES DE E-MAIL
 # ══════════════════════════════════════════════════════
-EMAIL_REMETENTE    = os.environ.get("EMAIL_REMETENTE",    "dondomingosbrasil@gmail.com")
-SENHA_APP          = os.environ.get("SENHA_APP",          "k caminho y r u a q h k f w d w d t")
-EMAIL_DESTINATARIO = os.environ.get("EMAIL_DESTINATARIO", "emersonddosantos@gmail.com")
+EMAIL_REMETENTE    = os.environ.get("EMAIL_REMETENTE",    "seuemail@gmail.com")
+SENHA_APP          = os.environ.get("SENHA_APP",          "xxxx xxxx xxxx xxxx")
+EMAIL_DESTINATARIO = os.environ.get("EMAIL_DESTINATARIO", "seuemail@gmail.com")
 
 # ══════════════════════════════════════════════════════
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
@@ -164,8 +164,15 @@ def salvar_courses_json(cursos: list[dict]):
 
 def carregar_estado() -> dict:
     if os.path.exists(ARQUIVO_ESTADO):
-        with open(ARQUIVO_ESTADO, encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(ARQUIVO_ESTADO, encoding="utf-8") as f:
+                conteudo = f.read().strip()
+                if not conteudo:
+                    return {}
+                return json.loads(conteudo)
+        except json.JSONDecodeError:
+            print("[Aviso] estado.json inválido, iniciando do zero.")
+            return {}
     return {}
 
 
