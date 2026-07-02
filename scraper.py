@@ -59,7 +59,7 @@ HEADERS = {
     "Origin": "https://www.ead.senac.br",
 }
 
-DEBUG = False  # Mude para False após confirmar que está funcionando
+DEBUG = True  # Mude para False após confirmar que está funcionando
 
 
 # ══════════════════════════════════════════════════════
@@ -199,7 +199,7 @@ def enviar_email(cursos_novos: list[dict]):
     msg["Subject"] = assunto
     msg.attach(MIMEText(corpo, "plain", "utf-8"))
 
-    with smtplib.SMTP("smtp.gmail.com", 587) as s:
+    with smtplib.SMTP("smtp-relay.brevo.com", 587) as s:
         s.starttls()
         s.login(BREVO_LOGIN, BREVO_SENHA)
         s.send_message(msg)
