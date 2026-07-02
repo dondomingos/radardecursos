@@ -59,7 +59,7 @@ HEADERS = {
     "Origin": "https://www.ead.senac.br",
 }
 
-DEBUG = True  # Mude para False após confirmar que está funcionando
+DEBUG = False  # Mude para False após confirmar que está funcionando
 
 
 # ══════════════════════════════════════════════════════
