@@ -219,6 +219,47 @@ def enviar_email(cursos_novos: list[dict]):
 # MAIN
 # ══════════════════════════════════════════════════════
 
+def enviar_report_sem_novidade(todos_cursos: list[dict]):
+    abertos  = [c for c in todos_cursos if c["aberto"]]
+    fechados = [c for c in todos_cursos if not c["aberto"]]
+
+    linhas_abertos  = "".join(f"<li>{c['nome']}</li>" for c in abertos)
+    linhas_fechados = "".join(f"<li>{c['nome']}</li>" for c in fechados)
+
+    corpo_html = f"""
+    <h2>📋 Report diário — Radar de Cursos</h2>
+    <p>Nenhuma alteração desde o último monitoramento.</p>
+    <h3 style="color:#16a34a">✅ Cursos com inscrições abertas ({len(abertos)})</h3>
+    <ul>{linhas_abertos if linhas_abertos else "<li>Nenhum</li>"}</ul>
+    <h3 style="color:#6b7280">❌ Cursos encerrados ({len(fechados)})</h3>
+    <ul>{linhas_fechados if linhas_fechados else "<li>Nenhum</li>"}</ul>
+    <p><a href="{BASE_URL}">Acessar Senac EAD Gratuito</a></p>
+    """
+
+    payload = {{
+        "sender":      {{"name": "Radar de Cursos", "email": EMAIL_REMETENTE}},
+        "to":          [{{"email": EMAIL_DESTINATARIO}}],
+        "subject":     "📋 Report diário — sem novidades",
+        "htmlContent": corpo_html
+    }}
+
+    resp = requests.post(
+        "https://api.brevo.com/v3/smtp/email",
+        headers={{
+            "accept":       "application/json",
+            "content-type": "application/json",
+            "api-key":      BREVO_API_KEY
+        }},
+        json=payload,
+        timeout=15
+    )
+
+    if resp.status_code == 201:
+        print("[E-mail] Report diário enviado.")
+    else:
+        print(f"[E-mail] Erro ao enviar report: {resp.status_code} - {resp.text}")
+
+
 def main():
     todos_cursos = buscar_cursos_senac()
     salvar_courses_json(todos_cursos)
@@ -245,7 +286,9 @@ def main():
         else:
             print("[DEBUG] E-mail não enviado (DEBUG=True). Mude para False para ativar.")
     else:
-        print("[Info] Nenhum curso novo. Nada a notificar.")
+        print("[Info] Nenhum curso novo. Enviando e-mail de report.")
+        if not DEBUG:
+            enviar_report_sem_novidade(todos_cursos)
 
     salvar_estado(estado)
 
