@@ -236,20 +236,20 @@ def enviar_report_sem_novidade(todos_cursos: list[dict]):
     <p><a href="{BASE_URL}">Acessar Senac EAD Gratuito</a></p>
     """
 
-    payload = {{
-        "sender":      {{"name": "Radar de Cursos", "email": EMAIL_REMETENTE}},
-        "to":          [{{"email": EMAIL_DESTINATARIO}}],
+    payload = {
+        "sender":      {"name": "Radar de Cursos", "email": EMAIL_REMETENTE},
+        "to":          [{"email": EMAIL_DESTINATARIO}],
         "subject":     "📋 Report diário — sem novidades",
         "htmlContent": corpo_html
-    }}
+    }
 
     resp = requests.post(
         "https://api.brevo.com/v3/smtp/email",
-        headers={{
+        headers={
             "accept":       "application/json",
             "content-type": "application/json",
             "api-key":      BREVO_API_KEY
-        }},
+        },
         json=payload,
         timeout=15
     )
