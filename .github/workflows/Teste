@@ -1,0 +1,16 @@
+name: Teste Scheduler
+
+on:
+  schedule:
+    - cron: '40 * * * *'
+  workflow_dispatch:
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mostrar data
+        run: |
+          echo "Workflow executado!"
+          date
