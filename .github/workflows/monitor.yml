@@ -2,7 +2,7 @@ name: Monitor Radar de Cursos
 
 on:
   schedule:
-    - cron: '12 12,15,0 * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 permissions:
