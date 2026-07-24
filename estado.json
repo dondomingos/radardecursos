@@ -42,5 +42,41 @@
   "Senac EAD::Técnico em Transações Imobiliárias EAD PSG": {
     "aberto": false,
     "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Desenvolvimento de Sistemas PSG EAD": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Guia de Turismo EAD PSG": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Logística EAD PSG": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Meio Ambiente EAD PSG": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Qualidade EAD PSG": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Recursos Humanos EAD PSG": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Secretariado EAD PSG": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Segurança do Trabalho EAD PSG": {
+    "aberto": false,
+    "notificado_aberto": false
+  },
+  "Senac EAD::Técnico em Óptica EAD PSG - EXCLUSIVO MARANHÃO": {
+    "aberto": false,
+    "notificado_aberto": false
   }
 }
