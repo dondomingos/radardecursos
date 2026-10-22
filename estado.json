@@ -76,14 +76,18 @@
     "notificado_aberto": true
   },
   "Senac EAD::Técnico em Óptica EAD PSG - EXCLUSIVO MARANHÃO": {
-    "aberto": false,
-    "notificado_aberto": false
+    "aberto": true,
+    "notificado_aberto": true
   },
   "Senac EAD::Técnico em Administração EAD PSG": {
     "aberto": true,
     "notificado_aberto": true
   },
   "Senac EAD::Técnico em Óptica EAD PSG - EXCLUSIVO GOIÁS": {
+    "aberto": true,
+    "notificado_aberto": true
+  },
+  "Senac EAD::Técnico em Guia de Turismo EAD PSG - EXCLUSIVO MARANHÃO": {
     "aberto": true,
     "notificado_aberto": true
   }
