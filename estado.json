@@ -48,8 +48,8 @@
     "notificado_aberto": true
   },
   "Senac EAD::Técnico em Guia de Turismo EAD PSG": {
-    "aberto": false,
-    "notificado_aberto": false
+    "aberto": true,
+    "notificado_aberto": true
   },
   "Senac EAD::Técnico em Logística EAD PSG": {
     "aberto": true,
@@ -92,6 +92,10 @@
     "notificado_aberto": true
   },
   "Senac EAD::Técnico em Marketing PSG": {
+    "aberto": true,
+    "notificado_aberto": true
+  },
+  "Senac EAD::Técnico em Óptica EAD PSG": {
     "aberto": true,
     "notificado_aberto": true
   }
