@@ -92,8 +92,8 @@
     "notificado_aberto": true
   },
   "Senac EAD::Técnico em Marketing PSG": {
-    "aberto": true,
-    "notificado_aberto": true
+    "aberto": false,
+    "notificado_aberto": false
   },
   "Senac EAD::Técnico em Óptica EAD PSG": {
     "aberto": false,
